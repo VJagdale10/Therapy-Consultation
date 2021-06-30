@@ -77,5 +77,7 @@ app.get("/", (req, res) => {
     return res.redirect('TY_Booking.html');
 }).listen(3000);
 
-
-console.log("Connected to port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
+    console.log(`Connected at server ${PORT}`)
+});
