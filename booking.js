@@ -12,6 +12,11 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const serverRoutes = require('./server')
+const paymentRoutes = require('./payment')
+
+app.use(serverRoutes)
+app.use(paymentRoutes)
 //app.use(bodyParser.json())
 //app.use(express.static('public'))
 //app.use(bodyParser.urlencoded({
@@ -80,3 +85,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => { // do not add localhost here if you are deploying it
     console.log("Connected at server " + port);
 });
+
+module.exports = { db }

@@ -1,31 +1,33 @@
 var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
+const { db } = require('./booking')
+ 
 
-const app = express()
+const router = express.Router()
 
-app.use(bodyParser.json())
-app.use(express.static('public'))
-app.use(bodyParser.urlencoded({
+router.use(bodyParser.json())
+router.use(express.static('public'))
+router.use(bodyParser.urlencoded({
     extended: true
 }))
 
-mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}, (err) => {
-    if (!err) {
-        console.log('MongoDB Connection Succeeded.');
-    } else {
-        console.log('Error in DB connection : ' + err);
-    }
-});
-var db = mongoose.connection;
+// mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// }, (err) => {
+//     if (!err) {
+//         console.log('MongoDB Connection Succeeded.');
+//     } else {
+//         console.log('Error in DB connection : ' + err);
+//     }
+// });
+// var db = mongoose.connection;
 
 db.on('error', () => console.log("Error in Connecting to Database"));
 db.once('open', () => console.log("Connected to Database"))
 
-app.post("/payment", (req, res) => {
+router.post("/payment", (req, res) => {
     var cno = req.body.cno;
     var cname = req.body.cname;
     var date = req.body.date;
@@ -49,9 +51,11 @@ app.post("/payment", (req, res) => {
 
 })
 
-app.get("/", (req, res) => {
-    res.set({
-        "Allow-access-Allow-Origin": '*'
-    })
-    return res.redirect('TY_Payment.html');
-}).listen(3000);
+
+module.exports = { router }
+// app.get("/", (req, res) => {
+//     res.set({
+//         "Allow-access-Allow-Origin": '*'
+//     })
+//     return res.redirect('TY_Payment.html');
+// }).listen(3000);
