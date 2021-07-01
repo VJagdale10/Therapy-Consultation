@@ -14,9 +14,11 @@ app.use(express.json());
 
 const serverRoutes = require('./server')
 const paymentRoutes = require('./payment')
+const loginroutes = require('./public/routes/index')
 
 app.use(serverRoutes)
 app.use(paymentRoutes)
+app.use(loginroutes)
 //app.use(bodyParser.json())
 //app.use(express.static('public'))
 //app.use(bodyParser.urlencoded({
@@ -69,8 +71,8 @@ app.post("/appointment", (req, res) => {
     return res.redirect('TY_Booking.html')
 
 })
-const app1 = require('express')();
-app1.get('/public/index.html', (req, res) => {
+// const app1 = require('express')();
+app.get('/public/index.html', (req, res) => {
     res.redirect('/public/views/index.ejs');
 });
 

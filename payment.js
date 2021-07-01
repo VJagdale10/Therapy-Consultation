@@ -1,7 +1,7 @@
 var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
-const { db } = require('./booking')
+const Payment = require('./public/models/payment')
  
 
 const router = express.Router()
@@ -24,8 +24,8 @@ router.use(bodyParser.urlencoded({
 // });
 // var db = mongoose.connection;
 
-db.on('error', () => console.log("Error in Connecting to Database"));
-db.once('open', () => console.log("Connected to Database"))
+// db.on('error', () => console.log("Error in Connecting to Database"));
+// db.once('open', () => console.log("Connected to Database"))
 
 router.post("/payment", (req, res) => {
     var cno = req.body.cno;
@@ -39,6 +39,15 @@ router.post("/payment", (req, res) => {
         "date": date,
         "cvv": cvv
     }
+
+    var payment = new Payment(data)
+
+    payment.save((err, doc) => {
+        if(err){
+            console.log(err)
+        }
+        console.log("success", doc)
+    })
 
     db.collection('users').insertOne(data, (err, collection) => {
         if (err) {
