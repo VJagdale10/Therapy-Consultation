@@ -36,9 +36,9 @@ router.get('/index', function(req, res, next) {
     res.render('path/to/ejs/views/index');
 });
 
-router.set('view engine', 'ejs');
-router.set('views', path.join(__dirname, './public/views'));
-router.use(express.static(path.join(__dirname + '/views/css')));
+// router.set('view engine', 'ejs');
+// router.set('views', path.join(__dirname, './public/views'));
+// router.use(express.static(path.join(__dirname + '/views/css')));
 
 
 router.use(bodyParser.json());
