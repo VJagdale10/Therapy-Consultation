@@ -23,15 +23,16 @@ const serverRoutes = require('./server')
 const paymentRoutes = require('./payment')
 const loginroutes = require('./public/routes/index')
 
-app.use(serverRoutes)
-app.use(paymentRoutes)
-app.use(loginroutes)
+
 app.use(session({
     secret: 'story book',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://<loginregister+ loginregister123>@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
 }));
+app.use(serverRoutes)
+app.use(paymentRoutes)
+app.use(loginroutes)
 
 mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -81,17 +82,17 @@ app.post("/appointment", (req, res) => {
     return res.redirect('TY_Booking.html')
 
 })
-// const app1 = require('express')();
-app.get('/public/index.html', (req, res) => {
-    res.redirect('/public/views/index.ejs');
+
+app.get('/register', (req, res) => {
+    res.render('index.ejs');
 });
 
-app.get("/", (req, res) => {
+app.get("/thankyou", (req, res) => {
     res.set({
         "Allow-access-Allow-Origin": '*'
     })
     return res.redirect('TY_Booking.html');
-}).listen(3000);
+})
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => { // do not add localhost here if you are deploying it

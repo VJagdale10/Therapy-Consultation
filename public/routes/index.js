@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+const path = require('path')
 
 router.get('/', function(req, res, next) {
     return res.render('index.ejs');
@@ -19,35 +20,35 @@ router.post('/', function(req, res, next) {
 
             User.findOne({ email: personInfo.email }, function(err, data) {
                 if (!data) {
-                    var c;
-                    User.findOne({}, function(err, data) {
+                    // var c;
+                    var newPerson = new User({
+                        email: personInfo.email,
+                        username: personInfo.username,
+                        password: personInfo.password,
+                        passwordConf: personInfo.passwordConf
+                    });
 
-                        if (data) {
-                            console.log("if");
-                            c = data.unique_id + 1;
-                        } else {
-                            c = 1;
-                        }
+                    newPerson.save(function(err, Person) {
+                        if (err)
+                            console.log(err);
+                        else
+                            console.log('Success');
+                    });
+                    // User.findOne({}, function(err, data) {
 
-                        var newPerson = new User({
-                            unique_id: c,
-                            email: personInfo.email,
-                            username: personInfo.username,
-                            password: personInfo.password,
-                            passwordConf: personInfo.passwordConf
-                        });
+                    //     if (data) {
+                    //         console.log("if");
+                    //         c = data.unique_id + 1;
+                    //     } else {
+                    //         c = 1;
+                    //     }
 
-                        newPerson.save(function(err, Person) {
-                            if (err)
-                                console.log(err);
-                            else
-                                console.log('Success');
-                        });
+                        
 
-                    }).sort({ _id: -1 }).limit(1);
-                    res.send({ "Success": "You are regestered,You can login now." });
+                    // }).sort({ _id: -1 }).limit(1);
+                    return res.send({ "Success": "You are regestered,You can login now." });
                 } else {
-                    res.send({ "Success": "Email is already used." });
+                    return res.send({ "Success": "Email is already used." });
                 }
 
             });
@@ -58,18 +59,19 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-    return res.render('login.ejs');
+    res.render('login.ejs');
 });
 
 router.post('/login', function(req, res, next) {
-    //console.log(req.body);
+    console.log("Login Body", req.body);
     User.findOne({ email: req.body.email }, function(err, data) {
         if (data) {
 
             if (data.password == req.body.password) {
                 //console.log("Done Login");
-                req.session.userId = data.unique_id;
+                req.session.user = data
                 //console.log(req.session.userId);
+                console.log(req.session)
                 res.send({ "Success": "Success!" });
 
             } else {
@@ -83,7 +85,7 @@ router.post('/login', function(req, res, next) {
 
 router.get('/profile', function(req, res, next) {
     console.log("profile");
-    User.findOne({ unique_id: req.session.userId }, function(err, data) {
+    User.findOne({ _id: req.session.user._id }, function(err, data) {
         console.log("data");
         console.log(data);
         if (!data) {
@@ -94,6 +96,11 @@ router.get('/profile', function(req, res, next) {
         }
     });
 });
+
+router.get('/cart', (req, res) => {
+    console.log('cart')
+    res.sendFile(path.resolve(__dirname, '..', 'cart.html'))
+})
 
 router.get('/logout', function(req, res, next) {
     console.log("logout")

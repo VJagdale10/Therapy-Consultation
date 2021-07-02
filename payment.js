@@ -56,9 +56,3 @@ router.post("/payment", (req, res) => {
 
 
 module.exports = router
-// app.get("/", (req, res) => {
-//     res.set({
-//         "Allow-access-Allow-Origin": '*'
-//     })
-//     return res.redirect('TY_Payment.html');
-// }).listen(3000);
