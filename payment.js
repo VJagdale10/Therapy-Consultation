@@ -28,10 +28,10 @@ router.post("/payment", (req, res) => {
     var cvv = req.body.cvv
 
     var data = {
-        "cno": cno,
+        "cno": parseInt(cno),
         "cnane": cname,
         "date": date,
-        "cvv": cvv
+        "cvv": parseInt(cvv)
     }
 
     var payment = new Payment(data)
@@ -43,14 +43,14 @@ router.post("/payment", (req, res) => {
         console.log("success", doc)
     })
 
-    db.collection('users').insertOne(data, (err, collection) => {
-        if (err) {
-            throw err;
-        }
-        console.log("Record Inserted Successfully");
-    });
+    // db.collection('users').insertOne(data, (err, collection) => {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     console.log("Record Inserted Successfully");
+    // });
 
-    return res.redirect('/public/TY_Payment');
+    return res.redirect('TY_Payment.html');
 
 })
 
