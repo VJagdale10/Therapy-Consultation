@@ -1,7 +1,8 @@
 var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
-
+var ejs = require('ejs');
+var path = require('path');
 const app = express()
 
 var express = require("express")

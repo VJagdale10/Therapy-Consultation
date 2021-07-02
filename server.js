@@ -1,7 +1,6 @@
 var express = require('express');
 var env = require('dotenv').config()
-var ejs = require('ejs');
-var path = require('path');
+
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -25,12 +24,12 @@ const { db } = require('./booking')
 // db.on('error', console.error.bind(console, 'connection error:'));
 // db.once('open', function() {});
 
-router.use(session({
-    secret: 'story book',
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://<loginregister+ loginregister123>@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
-}));
+// router.use(session({
+//     secret: 'story book',
+//     resave: false,
+//     saveUninitialized: false,
+//     store: MongoStore.create({ mongoUrl: 'mongodb+srv://<loginregister+ loginregister123>@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
+// }));
 
 router.get('/index', function(req, res, next) {
     res.render('path/to/ejs/views/index');
