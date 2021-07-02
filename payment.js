@@ -36,12 +36,6 @@ router.post("/payment", (req, res) => {
 
     var payment = new Payment(data)
 
-    payment.save((err, doc) => {
-        if (err) {
-            console.log(err)
-        }
-        console.log("success", doc)
-    })
 
     db.collection('users').insertOne(data, (err, collection) => {
         if (err) {
