@@ -50,7 +50,7 @@ router.post("/payment", (req, res) => {
         console.log("Record Inserted Successfully");
     });
 
-    return res.redirect('/public/TY_Payment');
+    return res.redirect('/public/TY_Payment.html')
 
 })
 
