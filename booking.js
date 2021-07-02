@@ -30,7 +30,7 @@ app.use(session({
     secret: 'story book',
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://<loginregister+ loginregister123>@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
 }));
 
 mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
