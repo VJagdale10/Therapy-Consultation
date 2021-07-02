@@ -55,7 +55,7 @@ router.post("/payment", (req, res) => {
 })
 
 
-module.exports = { router }
+module.exports = router
 // app.get("/", (req, res) => {
 //     res.set({
 //         "Allow-access-Allow-Origin": '*'

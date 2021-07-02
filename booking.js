@@ -3,6 +3,8 @@ var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
 var ejs = require('ejs');
 var path = require('path');
+var session = require('express-session');
+var MongoStore = require('connect-mongo');
 const app = express()
 
 var express = require("express")
@@ -91,9 +93,9 @@ app.get("/", (req, res) => {
     return res.redirect('TY_Booking.html');
 }).listen(3000);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => { // do not add localhost here if you are deploying it
     console.log("Connected at server " + port);
 });
 
-module.exports = { db }
+// module.exports = { db }

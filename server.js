@@ -4,10 +4,10 @@ var env = require('dotenv').config()
 var router = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var session = require('express-session');
-var MongoStore = require('connect-mongo');
+// var session = require('express-session');
+// var MongoStore = require('connect-mongo');
 
-const { db } = require('./booking')
+// const { db } = require('./booking')
 
 // mongoose.connect('mongodb+srv://loginregister:loginregister123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 //     useNewUrlParser: true,
@@ -62,7 +62,7 @@ router.use(function(err, req, res, next) {
 });
 
 
-module.exports = { router }
+module.exports = router
 
 // const PORT = process.env.PORT || 3000;
 // app.listen(PORT, function() {
