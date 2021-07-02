@@ -2,7 +2,7 @@ var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
 const Payment = require('./public/models/payment')
- 
+
 
 const router = express.Router()
 
@@ -37,7 +37,7 @@ router.post("/payment", (req, res) => {
     var payment = new Payment(data)
 
     payment.save((err, doc) => {
-        if(err){
+        if (err) {
             console.log(err)
         }
         console.log("success", doc)
@@ -50,15 +50,15 @@ router.post("/payment", (req, res) => {
         console.log("Record Inserted Successfully");
     });
 
-    return res.redirect('./public/TY_Payment.html')
+    return res.redirect('/public/TY_Payment');
 
 })
 
 
 module.exports = router
-// app.get("/", (req, res) => {
-//     res.set({
-//         "Allow-access-Allow-Origin": '*'
-//     })
-//     return res.redirect('TY_Payment.html');
-// }).listen(3000);
+    // app.get("/", (req, res) => {
+    //     res.set({
+    //         "Allow-access-Allow-Origin": '*'
+    //     })
+    //     return res.redirect('TY_Payment.html');
+    // }).listen(3000);
