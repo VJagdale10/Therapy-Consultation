@@ -58,7 +58,7 @@ router.get("/thankyou", (req, res) => {
     res.set({
         "Allow-access-Allow-Origin": '*'
     })
-    return res.redirect('/public/TY_Booking.html');
+    return res.redirect('/public/TY_Payment.html');
 })
 
 
