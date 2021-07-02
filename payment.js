@@ -6,12 +6,6 @@ const Payment = require('./public/models/payment')
 
 const router = express.Router()
 
-router.use(bodyParser.json())
-router.use(express.static('public'))
-router.use(bodyParser.urlencoded({
-    extended: true
-}))
-
 // mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true

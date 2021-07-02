@@ -8,9 +8,13 @@ var express = require("express")
 var bodyParser = require("body-parser")
 var mongoose = require("mongoose")
 
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, './public/views'));
+app.use(express.static(path.join(__dirname + '/views/css')));
 
 const serverRoutes = require('./server')
 const paymentRoutes = require('./payment')
@@ -19,11 +23,12 @@ const loginroutes = require('./public/routes/index')
 app.use(serverRoutes)
 app.use(paymentRoutes)
 app.use(loginroutes)
-//app.use(bodyParser.json())
-//app.use(express.static('public'))
-//app.use(bodyParser.urlencoded({
-//extended:true
-//}))
+app.use(session({
+    secret: 'story book',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://<loginregister+ loginregister123>@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
+}));
 
 mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -40,6 +45,8 @@ var db = mongoose.connection;
 
 db.on('error', () => console.log("Error in Connecting to Database"));
 db.once('open', () => console.log("Connected to Database"))
+
+
 
 app.post("/appointment", (req, res) => {
     var name = req.body.name;
