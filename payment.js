@@ -36,12 +36,12 @@ router.post("/payment", (req, res) => {
 
     var payment = new Payment(data)
 
-    // payment.save((err, doc) => {
-    //     if (err) {
-    //         console.log(err)
-    //     }
-    //     console.log("success", doc)
-    // })
+    payment.save((err, doc) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log("success", doc)
+    })
 
     // db.collection('users').insertOne(data, (err, collection) => {
     //     if (err) {
@@ -58,7 +58,7 @@ router.get("/thankyou", (req, res) => {
     res.set({
         "Allow-access-Allow-Origin": '*'
     })
-    return res.redirect('/public/TY_Payment.html');
+    return res.redirect('/TY_Payment.html');
 })
 
 

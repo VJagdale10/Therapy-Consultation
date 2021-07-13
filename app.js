@@ -5,14 +5,9 @@ var path = require('path');
 var session = require('express-session');
 var MongoStore = require('connect-mongo');
 
-
-const app = express()
-
+const Contact = require("./public/models/contact")
 const router = express.Router()
 
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 //app.use(bodyParser.json())
 //app.use(express.static('public'))
 //app.use(bodyParser.urlencoded({
@@ -34,26 +29,26 @@ app.use(express.json());
 // db.on('error', () => console.log("Error in Connecting to Database"));
 // db.once('open', () => console.log("Connected to Database"))
 
-app.post("/contact", (req, res) => {
-    var name2 = req.body.name2;
-    var email2 = req.body.email2;
+router.post("/contact", (req, res) => {
+    var name = req.body.name2;
+    var email = req.body.email2;
     var message = req.body.message;
 
     var data = {
-        "name2": name2,
-        "email2": email2,
+        "name": name,
+        "email": email,
         "message": message
     }
 
-    db.collection('contact').insertOne(data, (err, collection) => {
-        if (err) {
-            throw err;
+    const contact = new Contact(data)
+
+    contact.save((err, doc) => {
+        if(err){
+            console.log(err)
         }
-        console.log("Record Inserted Successfully");
-    });
-
-    return res.redirect('/public/index.html')
-
+        console.log(doc)
+    })
+    return res.redirect('/index.html')
 })
 
 // app.get("/", (req, res) => {
