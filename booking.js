@@ -17,12 +17,12 @@ app.use(express.static('public'));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, './public/views'));
-app.use(express.static(path.join(__dirname + './public/views/css')));
+app.use(express.static(path.join(__dirname + './views/css')));
 
 const serverRoutes = require('./server')
 const paymentRoutes = require('./payment')
 const loginroutes = require('./public/routes/index')
-
+const contactRoutes = require('./app')
 
 app.use(session({
     secret: 'story book',
@@ -33,6 +33,7 @@ app.use(session({
 app.use(serverRoutes)
 app.use(paymentRoutes)
 app.use(loginroutes)
+app.use(contactRoutes)
 
 mongoose.connect('mongodb+srv://user123:userpass123@cluster0.cp2c5.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -79,7 +80,7 @@ app.post("/appointment", (req, res) => {
         console.log("Record Inserted Successfully");
     });
 
-    return res.redirect('TY_Booking.html')
+    return res.redirect('/public/TY_Booking.html')
 
 })
 
