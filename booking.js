@@ -80,7 +80,7 @@ app.post("/appointment", (req, res) => {
         console.log("Record Inserted Successfully");
     });
 
-    return res.redirect('/public/TY_Booking.html')
+    return res.redirect('TY_Booking.html')
 
 })
 
